@@ -1,11 +1,18 @@
-// ------------------ Insect Page Trigger ------------------
+// ------------------ Insect Page Trigger with Animation ------------------
 const secretTrigger = document.getElementById('secret-trigger');
 const insectPage = document.getElementById('insect-page');
 const codeViewer = document.getElementById('code-viewer');
 
 secretTrigger.addEventListener('click', () => {
-    insectPage.style.display = 'none';
-    codeViewer.style.display = 'flex';
+    // Start fade-out animation
+    insectPage.classList.add('fade-out');
+
+    // After fade-out, hide insect page and fade-in code viewer
+    setTimeout(() => {
+        insectPage.style.display = 'none';
+        codeViewer.style.display = 'flex';
+        codeViewer.classList.add('fade-in');
+    }, 600); // 600ms matches fadeOut duration in CSS
 });
 
 // ------------------ Sidebar Scroll Spy ------------------
@@ -57,7 +64,7 @@ let isResizing = false;
 let lastDownX = 0;
 
 sidebar.addEventListener('mousedown', e => {
-    if (e.offsetX > sidebar.offsetWidth - 10) { // right edge
+    if (e.offsetX > sidebar.offsetWidth - 10) {
         isResizing = true;
         lastDownX = e.clientX;
         document.body.style.cursor = 'ew-resize';
